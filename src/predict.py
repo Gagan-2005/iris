@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 import os
 
-# Choose model: 'rf' or 'knn'
+# Choose model: 'rf' or 'knn' 
 model_choice = 'knn'  # Change to 'rf' if you want Random Forest
 
 model_path = f"model/{model_choice}_model.pkl"
