@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import joblib
+import os
 
 # Load dataset
 df = pd.read_csv("iris.data", header=None)
@@ -19,8 +20,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 clf = RandomForestClassifier(n_estimators=100, random_state=42)
 clf.fit(X_train, y_train)
 
-# Save model
-joblib.dump(clf, "iris_model.pkl")
+# Create model directory if it doesn't exist
+os.makedirs("model", exist_ok=True)
+
+# Save model to model/iris_model.pkl
+joblib.dump(clf, "model/iris_model.pkl")
 
 # Print accuracy
 print("Training Accuracy:", clf.score(X_train, y_train))
