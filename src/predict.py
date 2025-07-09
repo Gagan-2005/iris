@@ -2,16 +2,23 @@
 import joblib
 import numpy as np
 import os
+from sklearn.datasets import load_iris
 
-# Choose model: 'rf' or 'knn' 
-model_choice = 'knn'  # Change to 'rf' if you want Random Forest
-
-model_path = f"model/{model_choice}_model.pkl"
+# Load model
+model_path = os.path.join("model", "iris_model.pkl")
 model = joblib.load(model_path)
 
-# Sample input
+# Load feature names from sklearn iris dataset
+iris = load_iris()
+feature_names = iris.feature_names
+target_names = iris.target_names
+
+# Example input: [sepal_length, sepal_width, petal_length, petal_width]
+# Order must match iris.feature_names
 sample = np.array([[5.1, 3.5, 1.4, 0.2]])
 
 # Predict
 prediction = model.predict(sample)
-print(f"Predicted class using {model_choice.upper()} model:", prediction[0])
+predicted_class = prediction[0]
+
+print("Predicted class:", predicted_class)
