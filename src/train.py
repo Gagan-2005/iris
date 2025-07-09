@@ -1,19 +1,19 @@
-# train.py
 import pandas as pd
-from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 import joblib
 import os
 
-# Load dataset
-iris = load_iris(as_frame=True)
-df = iris.frame
-df["class"] = df["target"].map(dict(enumerate(iris.target_names)))
+# ✅ Load dataset from correct path
+data_path = "iris/data/iris.data"
+df = pd.read_csv(data_path, header=None)
+
+# ✅ Assign column names (standard for Iris dataset)
+df.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
 
 # Features and labels
-X = df[iris.feature_names]
+X = df.drop("class", axis=1)
 y = df["class"]
 
 # Train-test split
